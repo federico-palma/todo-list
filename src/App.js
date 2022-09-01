@@ -9,7 +9,8 @@ class TodoListClass {
   constructor(title) {
     this.id = uuidv4();
     this.title = title;
-    this.todoArray = ["do this", "and do this", "and also this"];
+    this.tasks = [];
+    this.completedTasks = [];
   }
 }
 
