@@ -2,6 +2,7 @@
   width: 30%;
   min-width: 200px;
   height: fit-content;
+  min-height: 100px;
   border: solid 2px black;
   margin: 10px;
   padding: 5px;
@@ -19,4 +20,10 @@
 .todo-list li {
   list-style: none;
   padding: 0px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.todo-list form{
+  margin-top: auto;
 }

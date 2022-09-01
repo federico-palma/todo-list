@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import classes from "./TodoList.module.css";
 
 const TodoList = ({ listObject, updateListHandler }) => {
   const newTaskInputRef = useRef();
+  const [showCompletedTasks, setShowCompletedTasks] = useState();
 
   const addNewTaskHandler = event => {
     event.preventDefault();
@@ -35,17 +36,20 @@ const TodoList = ({ listObject, updateListHandler }) => {
         {listObject.tasks.map((elem, index) => {
           return (
             <li key={index} onClick={e => toggleCompletedTaskStatus(e, "not-completed", index)}>
-              {elem}
+              O {elem}
             </li>
           );
         })}
       </ul>
-      {listObject.completedTasks && (
+      <p onClick={() => setShowCompletedTasks(prevState => !prevState)}>
+        {showCompletedTasks ? "Hide completed tasks" : "Show completed tasks"}
+      </p>
+      {showCompletedTasks && listObject.completedTasks && (
         <ul className={classes["completed-tasks"]}>
           {listObject.completedTasks.map((elem, index) => {
             return (
               <li key={index} onClick={e => toggleCompletedTaskStatus(e, "completed", index)}>
-                {elem}
+                X {elem}
               </li>
             );
           })}
