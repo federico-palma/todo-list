@@ -9,6 +9,7 @@ const NewListForm = ({ addNewListHandler }) => {
     if (newListNameRef.current.value !== "") {
       addNewListHandler(newListNameRef.current.value);
     }
+    newListNameRef.current.value = "";
   };
 
   return (
