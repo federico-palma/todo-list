@@ -1,14 +1,19 @@
-import { v4 as uuidv4 } from 'uuid';
 import classes from "./Main.module.css";
 import NewListForm from "../Components/NewListForm";
+import TodoList from "../Components/TodoList";
 
-const Main = ({todoLists, addNewListHandler}) => {
+const Main = ({ todoLists, addNewListHandler, updateListHandler }) => {
   return (
     <div className={classes.main}>
       <NewListForm addNewListHandler={addNewListHandler}></NewListForm>
       <div className={classes["lists-container"]}>
-        {todoLists.map((todoList) => {
-          return <h2 key={todoList.id}>{todoList.title}</h2>
+        {todoLists.map(todoList => {
+          return (
+            <TodoList
+              key={todoList.id}
+              listObject={todoList}
+              updateListHandler={updateListHandler}></TodoList>
+          );
         })}
       </div>
     </div>
