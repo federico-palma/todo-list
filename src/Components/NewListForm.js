@@ -6,8 +6,9 @@ const NewListForm = ({ addNewListHandler }) => {
 
   const submitNewListHandler = event => {
     event.preventDefault();
-
-    addNewListHandler(newListNameRef.current.value)
+    if (newListNameRef.current.value !== "") {
+      addNewListHandler(newListNameRef.current.value);
+    }
   };
 
   return (
