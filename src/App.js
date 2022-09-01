@@ -33,6 +33,13 @@ function App() {
     setTodoLists(newList);
   };
 
+  const deleteListHandler = listObject => {
+    if (window.confirm(`Are you sure you want to delete the list: ${listObject.title}?`)) {
+      let newList = todoLists.filter(elem => elem.id !== listObject.id);
+      setTodoLists(newList);
+    }
+  };
+
   return (
     <div className="App">
       <Header></Header>
@@ -40,7 +47,8 @@ function App() {
       <Main
         todoLists={todoLists}
         addNewListHandler={addNewListHandler}
-        updateListHandler={updateListHandler}></Main>
+        updateListHandler={updateListHandler}
+        deleteListHandler={deleteListHandler}></Main>
     </div>
   );
 }

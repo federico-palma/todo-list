@@ -18,11 +18,25 @@
   box-shadow: 0px 3px 5px 1px grey;
 }
 
-.todo-list h2 {
+.todo-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.todo-header h2 {
   cursor:default;
   margin: 0px auto;
   width: 100%;
   border-bottom: 1px solid black;
+}
+
+.todo-header button {
+  cursor: pointer;
+  background: none;
+  border: 1px solid black;
+  border-radius: 8px;
+  width: 40px;
 }
 
 .tasks {

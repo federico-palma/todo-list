@@ -1,11 +1,10 @@
 import { useRef, useState } from "react";
 import classes from "./TodoList.module.css";
 
-const TodoList = ({ listObject, updateListHandler }) => {
+const TodoList = ({ listObject, updateListHandler, deleteListHandler }) => {
   const newTaskInputRef = useRef();
   const [showCompletedTasks, setShowCompletedTasks] = useState();
   // const [expandedList, setExpandedList] = useState(false);
-
 
   const addNewTaskHandler = event => {
     event.preventDefault();
@@ -17,7 +16,7 @@ const TodoList = ({ listObject, updateListHandler }) => {
     newTaskInputRef.current.value = "";
   };
 
-  const toggleCompletedTaskStatus = (event, currentList, index) => {
+  const toggleCompletedTaskStatus = (currentList, index) => {
     let newListObject = listObject;
     let element;
     if (currentList === "not-completed") {
@@ -32,11 +31,14 @@ const TodoList = ({ listObject, updateListHandler }) => {
 
   return (
     <div className={classes["todo-list"]}>
-      <h2>{listObject.title}</h2>
+      <div className={classes["todo-header"]}>
+        <h2>{listObject.title}</h2>
+        <button onClick={() => deleteListHandler(listObject)}>X</button>
+      </div>
       <ul className={classes.tasks}>
         {listObject.tasks.map((elem, index) => {
           return (
-            <li key={index} onClick={e => toggleCompletedTaskStatus(e, "not-completed", index)}>
+            <li key={index} onClick={e => toggleCompletedTaskStatus("not-completed", index)}>
               <p className={classes.task}>{elem}</p>
             </li>
           );
@@ -55,7 +57,7 @@ const TodoList = ({ listObject, updateListHandler }) => {
         <ul className={classes["completed-tasks"]}>
           {listObject.completedTasks.map((elem, index) => {
             return (
-              <li key={index} onClick={e => toggleCompletedTaskStatus(e, "completed", index)}>
+              <li key={index} onClick={e => toggleCompletedTaskStatus("completed", index)}>
                 <p className={`${classes.task} ${classes.completed}`}>{elem}</p>
               </li>
             );

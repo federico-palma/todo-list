@@ -2,7 +2,7 @@ import classes from "./Main.module.css";
 import NewListForm from "../Components/NewListForm";
 import TodoList from "../Components/TodoList";
 
-const Main = ({ todoLists, addNewListHandler, updateListHandler }) => {
+const Main = ({ todoLists, addNewListHandler, updateListHandler, deleteListHandler }) => {
   return (
     <div className={classes.main}>
       <NewListForm addNewListHandler={addNewListHandler}></NewListForm>
@@ -12,7 +12,8 @@ const Main = ({ todoLists, addNewListHandler, updateListHandler }) => {
             <TodoList
               key={todoList.id}
               listObject={todoList}
-              updateListHandler={updateListHandler}></TodoList>
+              updateListHandler={updateListHandler}
+              deleteListHandler={deleteListHandler}></TodoList>
           );
         })}
       </div>
