@@ -1,4 +1,13 @@
 .main{
   height: 100%;
-  margin-left: 300px;
+  margin: 80px 0px auto 300px;
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.lists-container {
+  width: 100%;
 }
