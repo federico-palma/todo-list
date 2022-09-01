@@ -1,0 +1,6 @@
+.todo-list {
+  width: 30%;
+  height: fit-content;
+  border: solid 2px black;
+  padding: 5px;
+}
