@@ -15,7 +15,7 @@ const NewListForm = ({ addNewListHandler }) => {
   return (
     <form onSubmit={submitNewListHandler} className={classes["new-list-form"]}>
       <input type="text" placeholder="Create new To Do List" ref={newListNameRef} />
-      <button>Create</button>
+      <button>+</button>
     </form>
   );
 };

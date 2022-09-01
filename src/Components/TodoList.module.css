@@ -1,29 +1,89 @@
 .todo-list {
-  width: 30%;
-  min-width: 200px;
+  width: 350px;
+  min-width: 250px;
   height: fit-content;
-  min-height: 100px;
+  min-height: 150px;
   border: solid 2px black;
+  border-radius: 10px;
   margin: 10px;
-  padding: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  transition: box-shadow 0.5s;
+}
+
+.todo-list:hover {
+  box-shadow: 0px 3px 5px 1px grey;
 }
 
 .todo-list h2 {
+  cursor:default;
   margin: 0px auto;
+  width: 100%;
+  border-bottom: 1px solid black;
 }
 
-.todo-list ul {
+.tasks {
+  width: 100%;
   padding: 0px;
   margin: 5px;
 }
 
-.todo-list li {
+.completed-tasks {
+  padding: 0px;
+  margin: 5px;
+}
+
+.tasks, .completed-tasks {
+  width: 100%;
+  font-size: 16px;
   list-style: none;
   padding: 0px;
   cursor: pointer;
   margin: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.todo-list form{
-  margin-top: auto;
+.completed {
+  text-decoration: line-through;
 }
+
+.toggle-complete {
+  margin-top: auto;
+  cursor: pointer;
+  font-size: 12px;
+  text-align: center;
+  align-self: center;
+}
+
+/* New task form */
+.new-task-form {
+  font-size: 16px;
+  height: fit-content;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 90% 1fr;
+}
+
+.new-task-form input {
+  border: none;
+  margin: 5px 5px;
+  outline: none;
+}
+
+.new-task-form button {
+  background: none;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+/* .expanded-list {
+  position: absolute;
+
+} */
