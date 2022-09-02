@@ -47,7 +47,7 @@
   margin: 5px 10px;
 }
 
-.tasks, .completed {
+.tasks {
   width: 100%;
   font-size: 16px;
   list-style-type: none;
