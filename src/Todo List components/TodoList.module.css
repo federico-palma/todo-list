@@ -18,6 +18,7 @@
   box-shadow: 0px 3px 5px 1px grey;
 }
 
+/* header */
 .todo-header {
   width: 100%;
   display: flex;
@@ -39,21 +40,17 @@
   width: 40px;
 }
 
-.tasks {
-  width: 100%;
+/* Tasks lists */
+.task-list {
+  list-style-type: none;
   padding: 0px;
-  margin: 5px;
+  margin: 5px 10px;
 }
 
-.completed-tasks {
-  padding: 0px;
-  margin: 5px;
-}
-
-.tasks, .completed-tasks {
+.tasks, .completed {
   width: 100%;
   font-size: 16px;
-  list-style: none;
+  list-style-type: none;
   padding: 0px;
   cursor: pointer;
   margin: 5px;
@@ -66,6 +63,7 @@
   text-decoration: line-through;
 }
 
+/* Show/Hide completed list */
 .toggle-complete {
   margin-top: auto;
   cursor: pointer;

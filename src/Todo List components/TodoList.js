@@ -53,7 +53,7 @@ const TodoList = ({ listObject, updateListHandler, deleteListHandler }) => {
         <TaskList
           listSource={listObject.completedTasks}
           toggleCompletedTaskStatus={toggleCompletedTaskStatus}
-          listType="completed-tasks"></TaskList>
+          listType="completed"></TaskList>
       )}
       <form className={classes["new-task-form"]} onSubmit={addNewTaskHandler}>
         <input ref={newTaskInputRef} type="text" placeholder="Add new task" />
