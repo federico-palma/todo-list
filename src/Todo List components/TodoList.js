@@ -20,7 +20,7 @@ const TodoList = ({ listObject, updateListHandler, deleteListHandler }) => {
   const toggleCompletedTaskStatus = (currentList, index) => {
     let newListObject = listObject;
     let element;
-    if (currentList === "completed-tasks") {
+    if (currentList === "completed") {
       element = newListObject.completedTasks.splice(index, 1);
       newListObject.tasks.push(element);
     } else {
