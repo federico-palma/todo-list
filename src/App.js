@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./Layout/Header";
 import Sidebar from "./Layout/Sidebar";
 import Main from "./Layout/Main";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 class TodoListClass {
@@ -15,11 +15,21 @@ class TodoListClass {
 }
 
 function App() {
-  const [todoLists, setTodoLists] = useState([]);
+  // Load and save to local storage the to do lists
+  const [todoLists, setTodoLists] = useState(() => {
+    if (localStorage.getItem("todoLists") !== null) {
+      let localStorageLists = JSON.parse(localStorage.getItem("todoLists"));
+      return localStorageLists
+    }
+    return []  
+  });
+
+  useEffect(() => {
+    localStorage.setItem("todoLists", JSON.stringify(todoLists));
+  }, [todoLists]);
 
   const addNewListHandler = title => {
     let newList = new TodoListClass(title);
-
     setTodoLists(prevState => [...prevState, newList]);
   };
 
