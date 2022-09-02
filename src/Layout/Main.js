@@ -1,6 +1,6 @@
 import classes from "./Main.module.css";
 import NewListForm from "../Components/NewListForm";
-import TodoList from "../Components/TodoList";
+import TodoList from "../Todo List components/TodoList";
 
 const Main = ({ todoLists, addNewListHandler, updateListHandler, deleteListHandler }) => {
   return (

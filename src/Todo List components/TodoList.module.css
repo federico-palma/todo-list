@@ -97,7 +97,9 @@
   border-radius: 8px;
 }
 
-/* .expanded-list {
+.expanded-list {
   position: absolute;
-
-} */
+  left: 50%;
+  transform: translateX(-50%);
+  top: 30%;
+}

@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import TaskList from "./TaskList";
 import classes from "./TodoList.module.css";
 
 const TodoList = ({ listObject, updateListHandler, deleteListHandler }) => {
@@ -19,12 +20,12 @@ const TodoList = ({ listObject, updateListHandler, deleteListHandler }) => {
   const toggleCompletedTaskStatus = (currentList, index) => {
     let newListObject = listObject;
     let element;
-    if (currentList === "not-completed") {
-      element = newListObject.tasks.splice(index, 1);
-      newListObject.completedTasks.push(element);
-    } else {
+    if (currentList === "completed-tasks") {
       element = newListObject.completedTasks.splice(index, 1);
       newListObject.tasks.push(element);
+    } else {
+      element = newListObject.tasks.splice(index, 1);
+      newListObject.completedTasks.push(element);
     }
     updateListHandler(newListObject);
   };
@@ -35,15 +36,10 @@ const TodoList = ({ listObject, updateListHandler, deleteListHandler }) => {
         <h2>{listObject.title}</h2>
         <button onClick={() => deleteListHandler(listObject)}>X</button>
       </div>
-      <ul className={classes.tasks}>
-        {listObject.tasks.map((elem, index) => {
-          return (
-            <li key={index} onClick={e => toggleCompletedTaskStatus("not-completed", index)}>
-              <p className={classes.task}>{elem}</p>
-            </li>
-          );
-        })}
-      </ul>
+      <TaskList
+        listSource={listObject.tasks}
+        toggleCompletedTaskStatus={toggleCompletedTaskStatus}
+        listType="tasks"></TaskList>
       <p
         onClick={() => setShowCompletedTasks(prevState => !prevState)}
         className={classes["toggle-complete"]}>
@@ -54,15 +50,10 @@ const TodoList = ({ listObject, updateListHandler, deleteListHandler }) => {
           : ""}
       </p>
       {showCompletedTasks && listObject.completedTasks.length > 0 && (
-        <ul className={classes["completed-tasks"]}>
-          {listObject.completedTasks.map((elem, index) => {
-            return (
-              <li key={index} onClick={e => toggleCompletedTaskStatus("completed", index)}>
-                <p className={`${classes.task} ${classes.completed}`}>{elem}</p>
-              </li>
-            );
-          })}
-        </ul>
+        <TaskList
+          listSource={listObject.completedTasks}
+          toggleCompletedTaskStatus={toggleCompletedTaskStatus}
+          listType="completed-tasks"></TaskList>
       )}
       <form className={classes["new-task-form"]} onSubmit={addNewTaskHandler}>
         <input ref={newTaskInputRef} type="text" placeholder="Add new task" />
