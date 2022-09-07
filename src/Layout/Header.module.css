@@ -17,7 +17,7 @@
   font-size: 2.5rem;
 }
 
-.account-preview {
+.account-icon {
   margin-left: auto;
   margin-right: 70px;
   width: 35px;
@@ -31,7 +31,7 @@
   cursor: pointer;
 }
 
-.account-preview img {
+.account-icon img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -91,10 +91,6 @@
   font-weight: 500;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-}
-
-.auth-div button:hover {
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 .auth-div button:active {
