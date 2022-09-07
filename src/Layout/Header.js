@@ -1,21 +1,26 @@
+import { useState } from "react";
 import classes from "./Header.module.css";
+import pngPerson from "../Assets/pngPerson.png";
+import AccountMenu from "./AccountMenu";
 
 const Header = ({ user, logInWithGoogleHandler, signOutHandler }) => {
+  const [showAccountMenu, setShowAccountMenu] = useState(false);
+
+  const showAccountMenuHandler = () => {
+    setShowAccountMenu(prevValue => !prevValue);
+  };
+
   return (
     <div className={classes.header}>
       <h1>ToDo App</h1>
-      {!user && (
-        <div className={classes["auth-div"]}>
-          <button className={classes["login-with-google-btn"]} onClick={logInWithGoogleHandler}>
-            Log In with Google
-          </button>
-        </div>
-      )}
-      {user && (
-        <div className={classes["auth-div"]}>
-          <h3>{user.displayName}</h3>
-          <button onClick={signOutHandler}>Log Out</button>
-        </div>
+      <div className={classes["account-preview"]} onClick={showAccountMenuHandler}>
+        <img src={user ? user.photoURL : pngPerson} alt="" />
+      </div>
+      {showAccountMenu && (
+        <AccountMenu
+          user={user}
+          logInWithGoogleHandler={logInWithGoogleHandler}
+          signOutHandler={signOutHandler}></AccountMenu>
       )}
     </div>
   );
