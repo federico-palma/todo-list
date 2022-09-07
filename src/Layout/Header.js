@@ -10,17 +10,22 @@ const Header = ({ user, logInWithGoogleHandler, signOutHandler }) => {
     setShowAccountMenu(prevValue => !prevValue);
   };
 
+  const closeMenuOnBlurHandler = () => {
+    setShowAccountMenu(false);
+  };
+
   return (
     <div className={classes.header}>
       <h1>ToDo App</h1>
-      <div className={classes["account-preview"]} onClick={showAccountMenuHandler}>
+      <div className={classes["account-icon"]} onClick={showAccountMenuHandler}>
         <img src={user ? user.photoURL : pngPerson} alt="" />
       </div>
       {showAccountMenu && (
         <AccountMenu
           user={user}
           logInWithGoogleHandler={logInWithGoogleHandler}
-          signOutHandler={signOutHandler}></AccountMenu>
+          signOutHandler={signOutHandler}
+          closeMenuOnBlurHandler={closeMenuOnBlurHandler}></AccountMenu>
       )}
     </div>
   );
