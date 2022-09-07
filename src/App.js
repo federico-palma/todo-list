@@ -4,6 +4,8 @@ import Sidebar from "./Layout/Sidebar";
 import Main from "./Layout/Main";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { auth, signInWithGoogle } from "./firebase-config";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 class TodoListClass {
   constructor(title) {
@@ -15,13 +17,28 @@ class TodoListClass {
 }
 
 function App() {
+  // handle User authentication
+  const [user, setUser] = useState({});
+
+  const logInWithGoogleHandler = () => {
+    signInWithGoogle();
+  };
+
+  const signOutHandler = async () => {
+    await signOut(auth);
+  };
+
+  onAuthStateChanged(auth, currentUser => {
+    setUser(currentUser);
+  });
+
   // Load and save to local storage the to do lists
   const [todoLists, setTodoLists] = useState(() => {
     if (localStorage.getItem("todoLists") !== null) {
       let localStorageLists = JSON.parse(localStorage.getItem("todoLists"));
-      return localStorageLists
+      return localStorageLists;
     }
-    return []  
+    return [];
   });
 
   useEffect(() => {
@@ -52,7 +69,10 @@ function App() {
 
   return (
     <div className="App">
-      <Header></Header>
+      <Header
+        user={user}
+        logInWithGoogleHandler={logInWithGoogleHandler}
+        signOutHandler={signOutHandler}></Header>
       <Sidebar></Sidebar>
       <Main
         todoLists={todoLists}
