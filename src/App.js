@@ -4,8 +4,9 @@ import Sidebar from "./Layout/Sidebar";
 import Main from "./Layout/Main";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { auth, signInWithGoogle } from "./firebase-config";
+import { auth, signInWithGoogle, dataBase } from "./firebase-config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onValue, ref, set } from "firebase/database";
 
 class TodoListClass {
   constructor(title) {
@@ -39,9 +40,16 @@ function App() {
     });
   }, []);
 
-  // Load and save to local storage the to do lists
+  // Handle To do list storage
   const [todoLists, setTodoLists] = useState(() => {
-    if (localStorage.getItem("todoLists") !== null) {
+    console.log(auth.currentUser);
+    if (auth.currentUser) {
+      const pathRef = ref(dataBase, "users/" + user.uid + "/todoLists");
+      onValue(pathRef, snapshot => {
+        const data = snapshot.val()
+        setTodoLists(data)
+      })
+    } else if (localStorage.getItem("todoLists") !== null) {
       let localStorageLists = JSON.parse(localStorage.getItem("todoLists"));
       return localStorageLists;
     }
@@ -52,6 +60,19 @@ function App() {
     localStorage.setItem("todoLists", JSON.stringify(todoLists));
   }, [todoLists]);
 
+  // Handle Save to Firebase realtime database
+  useEffect(() => {
+    if (auth.currentUser) {
+      const pathRef = ref(dataBase, "users/" + user.uid);
+      set(pathRef, {
+        name: user?.displayName,
+        email: user?.email,
+        todoLists: todoLists,
+      });
+    }
+  }, [user, todoLists]);
+
+  // Handle Todo lists
   const addNewListHandler = title => {
     let newList = new TodoListClass(title);
     setTodoLists(prevState => [...prevState, newList]);
