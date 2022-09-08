@@ -15,6 +15,10 @@ class TodoListClass {
 }
 
 function App() {
+  useEffect(() => {
+    document.title = "ToDo Lists App";
+  }, []);
+  
   // Load and save to local storage the to do lists
   const [todoLists, setTodoLists] = useState(() => {
     if (localStorage.getItem("todoLists") !== null) {
