@@ -28,9 +28,16 @@ function App() {
     await signOut(auth);
   };
 
-  onAuthStateChanged(auth, currentUser => {
-    setUser(currentUser);
-  });
+  useEffect(() => {
+    onAuthStateChanged(auth, currentUser => {
+      console.log(currentUser);
+      if (currentUser === null) {
+        setUser(null);
+      } else {
+        setUser(currentUser);
+      }
+    });
+  }, []);
 
   // Load and save to local storage the to do lists
   const [todoLists, setTodoLists] = useState(() => {
