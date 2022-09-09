@@ -18,9 +18,12 @@ class TodoListClass {
 }
 
 function App() {
-  // handle User authentication
+  const [todoLists, setTodoLists] = useState([]);
   const [user, setUser] = useState({});
+  const [userLoggedIn, setUserLoggedIn] = useState(false)
+  const [dataIsLoaded, setDataIsLoaded] = useState(false);
 
+  // handle User authentication
   const logInWithGoogleHandler = () => {
     signInWithGoogle();
   };
@@ -31,38 +34,54 @@ function App() {
 
   useEffect(() => {
     onAuthStateChanged(auth, currentUser => {
-      console.log(currentUser);
-      if (currentUser === null) {
-        setUser(null);
-      } else {
+      if (currentUser) {
         setUser(currentUser);
+        setUserLoggedIn(true)
+      } else {
+        setUser({});
+        setUserLoggedIn(false)
       }
     });
-  }, []);
+  }, [])
 
   // Handle To do list storage
-  const [todoLists, setTodoLists] = useState(() => {
-    console.log(auth.currentUser);
-    if (auth.currentUser) {
-      const pathRef = ref(dataBase, "users/" + user.uid + "/todoLists");
-      onValue(pathRef, snapshot => {
-        const data = snapshot.val()
-        setTodoLists(data)
-      })
-    } else if (localStorage.getItem("todoLists") !== null) {
-      let localStorageLists = JSON.parse(localStorage.getItem("todoLists"));
-      return localStorageLists;
-    }
-    return [];
-  });
+  // Save to local storage if User is not logged in
+  // if (!user && localStorage.getItem("todoLists") !== null) {
+  //   let localStorageLists = JSON.parse(localStorage.getItem("todoLists"));
+  //   setTodoLists(localStorageLists);
+  // }
 
-  useEffect(() => {
-    localStorage.setItem("todoLists", JSON.stringify(todoLists));
-  }, [todoLists]);
+  // useEffect(() => {
+  //   localStorage.setItem("todoLists", JSON.stringify(todoLists));
+  // }, [todoLists]);
 
   // Handle Save to Firebase realtime database
   useEffect(() => {
     if (auth.currentUser) {
+      const pathRef = ref(dataBase, "users/" + auth.currentUser.uid + "/todoLists");
+      onValue(pathRef, snapshot => {
+        const fetchedLists = [];
+        const data = snapshot.val();
+        if (data) {
+          data.forEach(dbList => {
+            fetchedLists.push({
+              id: dbList.id,
+              title: dbList.title,
+              tasks: dbList.tasks ? [...dbList.tasks] : [],
+              completedTasks: dbList.completedTasks ? [...dbList.completedTasks] : [],
+            });
+          });
+          setTodoLists([...fetchedLists]);
+          setDataIsLoaded(true);
+        } else {
+          setTodoLists([]);
+        }
+      });
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (auth.currentUser && dataIsLoaded) {
       const pathRef = ref(dataBase, "users/" + user.uid);
       set(pathRef, {
         name: user?.displayName,
@@ -70,7 +89,7 @@ function App() {
         todoLists: todoLists,
       });
     }
-  }, [user, todoLists]);
+  }, [user, todoLists, dataIsLoaded]);
 
   // Handle Todo lists
   const addNewListHandler = title => {
@@ -99,6 +118,7 @@ function App() {
     <div className="App">
       <Header
         user={user}
+        userLoggedIn={userLoggedIn}
         logInWithGoogleHandler={logInWithGoogleHandler}
         signOutHandler={signOutHandler}></Header>
       <Sidebar></Sidebar>

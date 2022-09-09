@@ -2,7 +2,13 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import classes from "./Header.module.css";
 
-const AccountMenu = ({ user, logInWithGoogleHandler, signOutHandler, closeMenuOnBlurHandler }) => {
+const AccountMenu = ({
+  user,
+  userLoggedIn,
+  logInWithGoogleHandler,
+  signOutHandler,
+  closeMenuOnBlurHandler,
+}) => {
   // Handle click outside menu to close it
   const accountMenuRef = useRef();
   useEffect(() => {
@@ -19,14 +25,14 @@ const AccountMenu = ({ user, logInWithGoogleHandler, signOutHandler, closeMenuOn
 
   return (
     <div ref={accountMenuRef} className={classes["account-menu"]}>
-      {!user && (
+      {!userLoggedIn && (
         <div className={classes["auth-div"]}>
           <button className={classes["login-with-google-btn"]} onClick={logInWithGoogleHandler}>
             Log In with Google
           </button>
         </div>
       )}
-      {user && (
+      {userLoggedIn && (
         <div className={classes["auth-div"]}>
           <h3>{user.displayName}</h3>
           <button onClick={signOutHandler} className={classes["logout-btn"]}>
