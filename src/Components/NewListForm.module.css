@@ -6,19 +6,29 @@
   border: 2px solid black;
   border-radius: 10px;
   padding: 8px;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 30px;
 }
 
 .new-list-form input {
   border: none;
   font-size: 20px;
   outline: none;
+  width: 100%;
 }
 
 .new-list-form button {
+  cursor: pointer;
   font-size: 20px;
-  background: none;
-  border: 1px solid black;
+  width: 100%;
+  aspect-ratio: 1/0.9;
+  color: white;
+  border: none;
   border-radius: 8px;
+  background-color: rgba(0, 159, 0, 0.550);
+  transition: background-color 0.5s;
+}
+
+.new-list-form button:hover {
+  background-color: rgb(0, 159, 0);
 }
