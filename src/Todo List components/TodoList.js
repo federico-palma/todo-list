@@ -43,13 +43,13 @@ const TodoList = ({ listObject, updateListHandler, deleteListHandler }) => {
       <p
         onClick={() => setShowCompletedTasks(prevState => !prevState)}
         className={classes["toggle-complete"]}>
-        {listObject.completedTasks.length > 0
+        {listObject.completedTasks?.length > 0
           ? showCompletedTasks
             ? "- Hide completed tasks -"
             : "- Show completed tasks -"
           : ""}
       </p>
-      {showCompletedTasks && listObject.completedTasks.length > 0 && (
+      {showCompletedTasks && listObject.completedTasks?.length > 0 && (
         <TaskList
           listSource={listObject.completedTasks}
           toggleCompletedTaskStatus={toggleCompletedTaskStatus}
