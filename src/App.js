@@ -20,8 +20,8 @@ class TodoListClass {
 function App() {
   const [todoLists, setTodoLists] = useState([]);
   const [user, setUser] = useState({});
-  const [userLoggedIn, setUserLoggedIn] = useState(false)
-  const [dataIsLoaded, setDataIsLoaded] = useState(false);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [firebaseDataIsLoaded, setFirebaseDataIsLoaded] = useState(false);
 
   // handle User authentication
   const logInWithGoogleHandler = () => {
@@ -30,30 +30,43 @@ function App() {
 
   const signOutHandler = async () => {
     await signOut(auth);
+    setUserLoggedIn(false);
+    setFirebaseDataIsLoaded(false);
+    setTodoLists(() => {
+      const localStorageLists =
+        localStorage.getItem("todoLists") !== null
+          ? JSON.parse(localStorage.getItem("todoLists"))
+          : [];
+      return localStorageLists;
+    });
   };
 
   useEffect(() => {
     onAuthStateChanged(auth, currentUser => {
       if (currentUser) {
         setUser(currentUser);
-        setUserLoggedIn(true)
+        setUserLoggedIn(true);
       } else {
         setUser({});
-        setUserLoggedIn(false)
+        setUserLoggedIn(false);
       }
     });
-  }, [])
+  }, []);
 
   // Handle To do list storage
   // Save to local storage if User is not logged in
-  // if (!user && localStorage.getItem("todoLists") !== null) {
-  //   let localStorageLists = JSON.parse(localStorage.getItem("todoLists"));
-  //   setTodoLists(localStorageLists);
-  // }
+  useEffect(() => {
+    if (!userLoggedIn && localStorage.getItem("todoLists") !== null) {
+      let localStorageLists = JSON.parse(localStorage.getItem("todoLists"));
+      setTodoLists(localStorageLists);
+    }
+  }, [userLoggedIn]);
 
-  // useEffect(() => {
-  //   localStorage.setItem("todoLists", JSON.stringify(todoLists));
-  // }, [todoLists]);
+  useEffect(() => {
+    if (!userLoggedIn) {
+      localStorage.setItem("todoLists", JSON.stringify(todoLists));
+    }
+  }, [todoLists, userLoggedIn]);
 
   // Handle Save to Firebase realtime database
   useEffect(() => {
@@ -72,7 +85,7 @@ function App() {
             });
           });
           setTodoLists([...fetchedLists]);
-          setDataIsLoaded(true);
+          setFirebaseDataIsLoaded(true);
         } else {
           setTodoLists([]);
         }
@@ -81,7 +94,7 @@ function App() {
   }, [user]);
 
   useEffect(() => {
-    if (auth.currentUser && dataIsLoaded) {
+    if (auth.currentUser && firebaseDataIsLoaded) {
       const pathRef = ref(dataBase, "users/" + user.uid);
       set(pathRef, {
         name: user?.displayName,
@@ -89,7 +102,7 @@ function App() {
         todoLists: todoLists,
       });
     }
-  }, [user, todoLists, dataIsLoaded]);
+  }, [user, todoLists, firebaseDataIsLoaded, userLoggedIn]);
 
   // Handle Todo lists
   const addNewListHandler = title => {
