@@ -138,7 +138,7 @@ function App() {
         userLoggedIn={userLoggedIn}
         logInWithGoogleHandler={logInWithGoogleHandler}
         signOutHandler={signOutHandler}></Header>
-      <Sidebar></Sidebar>
+      {/* <Sidebar></Sidebar> */}
       <Main
         todoLists={todoLists}
         addNewListHandler={addNewListHandler}
