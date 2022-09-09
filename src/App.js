@@ -18,6 +18,11 @@ class TodoListClass {
 }
 
 function App() {
+
+  useEffect(() => {
+    document.title = "ToDo Lists App";
+  }, []);
+  
   const [todoLists, setTodoLists] = useState([]);
   const [user, setUser] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(false);
