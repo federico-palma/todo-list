@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "./Layout/Header";
-import Sidebar from "./Layout/Sidebar";
+// import Sidebar from "./Layout/Sidebar";
 import Main from "./Layout/Main";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
