@@ -9,18 +9,24 @@ const Main = ({ todoLists, addNewListHandler, updateListHandler, deleteListHandl
   const [expandedListId, setExpandedListId] = useState(null);
 
   const showExpandedListHandler = todoList => {
-    setExpandedListId(todoList.id)
+    setExpandedListId(todoList.id);
     setShowExpandedList(true);
+  };
+
+  const closeExpandedListHandler = () => {
+    setExpandedListId(null);
+    setShowExpandedList(false);
   };
 
   return (
     <div className={classes.main}>
       <NewListForm addNewListHandler={addNewListHandler}></NewListForm>
-      {showExpandedList && (
+      {todoLists.length > 0 && showExpandedList && (
         <ExpandedList
           listObject={todoLists.filter(elem => elem.id === expandedListId)[0]}
           updateListHandler={updateListHandler}
-          deleteListHandler={deleteListHandler}></ExpandedList>
+          deleteListHandler={deleteListHandler}
+          closeExpandedListHandler={closeExpandedListHandler}></ExpandedList>
       )}
       <div className={classes["lists-container"]}>
         {todoLists.map(todoList => {
