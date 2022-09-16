@@ -2,7 +2,12 @@ import { useRef, useState } from "react";
 import TaskList from "./TaskList";
 import classes from "./TodoList.module.css";
 
-const TodoList = ({ listObject, updateListHandler, deleteListHandler }) => {
+const TodoList = ({
+  listObject,
+  updateListHandler,
+  deleteListHandler,
+  showExpandedListHandler,
+}) => {
   const newTaskInputRef = useRef();
   const [showCompletedTasks, setShowCompletedTasks] = useState();
   // const [expandedList, setExpandedList] = useState(false);
@@ -31,7 +36,11 @@ const TodoList = ({ listObject, updateListHandler, deleteListHandler }) => {
   };
 
   return (
-    <div className={classes["todo-list"]}>
+    <div
+      className={classes["todo-list"]}
+      onClick={() => {
+        showExpandedListHandler(listObject);
+      }}>
       <div className={classes["todo-header"]}>
         <h2>{listObject.title}</h2>
         <button onClick={() => deleteListHandler(listObject)}>X</button>
