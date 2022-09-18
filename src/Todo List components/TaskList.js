@@ -14,7 +14,10 @@ const TaskList = ({
           <li key={index}>
             <div
               className={classes.checkbox}
-              onClick={() => toggleCompletedTaskStatus(listType, index)}>
+              onClick={e => {
+                e.stopPropagation();
+                toggleCompletedTaskStatus(listType, index);
+              }}>
               {listType === "completed" ? "X" : "O"}
             </div>
             {!expandedList && (

@@ -35,12 +35,12 @@ const TodoList = ({
   };
 
   return (
-    <div className={classes["todo-list"]}>
-      <div
-        className={classes["todo-header"]}
-        onClick={() => {
-          showExpandedListHandler(listObject);
-        }}>
+    <div
+      className={classes["todo-list"]}
+      onClick={() => {
+        showExpandedListHandler(listObject);
+      }}>
+      <div className={classes["todo-header"]}>
         <h2>{listObject.title}</h2>
         <button
           onClick={e => {
@@ -55,7 +55,10 @@ const TodoList = ({
         toggleCompletedTaskStatus={toggleCompletedTaskStatus}
         listType="tasks"></TaskList>
       <p
-        onClick={() => setShowCompletedTasks(prevState => !prevState)}
+        onClick={e => {
+          e.stopPropagation();
+          setShowCompletedTasks(prevState => !prevState);
+        }}
         className={classes["toggle-complete"]}>
         {listObject.completedTasks?.length > 0
           ? showCompletedTasks
@@ -69,7 +72,12 @@ const TodoList = ({
           toggleCompletedTaskStatus={toggleCompletedTaskStatus}
           listType="completed"></TaskList>
       )}
-      <form className={classes["new-task-form"]} onSubmit={addNewTaskHandler}>
+      <form
+        className={classes["new-task-form"]}
+        onSubmit={addNewTaskHandler}
+        onClick={e => {
+          e.stopPropagation();
+        }}>
         <input ref={newTaskInputRef} type="text" placeholder="Add new task" />
         <button>+</button>
       </form>
