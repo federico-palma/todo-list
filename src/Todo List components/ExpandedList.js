@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import classes from "./TodoList.module.css";
 
 import TaskList from "./TaskList";
@@ -6,7 +6,7 @@ import TaskList from "./TaskList";
 const ExpandedList = ({
   listObject,
   updateListHandler,
-  deleteListHandler,
+  deleteExpListHandler,
   closeExpandedListHandler,
 }) => {
   const newTaskInputRef = useRef();
@@ -43,19 +43,6 @@ const ExpandedList = ({
     }
   };
 
-  const accountMenuRef = useRef();
-  useEffect(() => {
-    const handleClickOutside = event => {
-      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target)) {
-        
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [accountMenuRef]);
-
   return (
     <div className={classes["expanded-list-container"]} onClick={closeExpandedListHandler}>
       <div className={classes["expanded-list"]} onClick={e => e.stopPropagation()}>
@@ -67,7 +54,7 @@ const ExpandedList = ({
             suppressContentEditableWarning={true}>
             {listObject.title}
           </div>
-          {/* <button onClick={() => deleteListHandler(listObject)}>X</button> */}
+          <button onClick={() => deleteExpListHandler(listObject)}>X</button>
         </div>
         <TaskList
           listSource={listObject.tasks}

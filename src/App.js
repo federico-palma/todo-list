@@ -128,7 +128,9 @@ function App() {
     if (window.confirm(`Are you sure you want to delete the list: ${listObject.title}?`)) {
       let newList = todoLists.filter(elem => elem.id !== listObject.id);
       setTodoLists(newList);
+      return true
     }
+    else return false
   };
 
   return (

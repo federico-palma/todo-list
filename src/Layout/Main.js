@@ -14,9 +14,16 @@ const Main = ({ todoLists, addNewListHandler, updateListHandler, deleteListHandl
   };
 
   const closeExpandedListHandler = () => {
-    setExpandedListId(null);
     setShowExpandedList(false);
+    setExpandedListId(null);
   };
+
+  const deleteExpListHandler = (listObject) => {
+    if (deleteListHandler(listObject)) {
+      setShowExpandedList(false);
+      setExpandedListId(null);
+    } 
+  }
 
   return (
     <div className={classes.main}>
@@ -25,7 +32,7 @@ const Main = ({ todoLists, addNewListHandler, updateListHandler, deleteListHandl
         <ExpandedList
           listObject={todoLists.filter(elem => elem.id === expandedListId)[0]}
           updateListHandler={updateListHandler}
-          deleteListHandler={deleteListHandler}
+          deleteExpListHandler={deleteExpListHandler}
           closeExpandedListHandler={closeExpandedListHandler}></ExpandedList>
       )}
       <div className={classes["lists-container"]}>
