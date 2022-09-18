@@ -67,8 +67,8 @@ const ExpandedList = ({
   };
 
   return (
-    <div className={classes["expanded-list-container"]} onClick={closeExpandedListHandler}>
-      <div className={classes["expanded-list"]} onClick={e => e.stopPropagation()}>
+    <div className={classes["expanded-list-container"]} onMouseDown={closeExpandedListHandler}>
+      <div className={classes["expanded-list"]} onMouseDown={e => e.stopPropagation()}>
         <div className={classes["todo-header"]}>
           <div
             contentEditable={true}
