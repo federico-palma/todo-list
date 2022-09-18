@@ -13,6 +13,18 @@
   justify-content: flex-start;
   transition: box-shadow 0.5s;
   background-color: white;
+  animation: scale-list 0.3s ease-out;
+}
+
+@keyframes scale-list {
+  from {
+    transform: scale(50%);
+    opacity: 0;
+  }
+  to {
+    transform: scale(100%);
+    opacity: 1;
+  }
 }
 
 .todo-list:hover {
@@ -78,6 +90,18 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  animation: slide-task 0.2s ease-out;
+}
+
+@keyframes slide-task {
+  from {
+    transform: translateX(10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
 }
 
 .task:focus {
@@ -143,6 +167,16 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  animation: open-expanded-list-container 0.5s ease-out;
+}
+
+@keyframes open-expanded-list-container {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .expanded-list {
@@ -154,13 +188,24 @@
   max-width: 95%;
   border: solid 2px black;
   border-radius: 10px;
-  margin: 10px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   background-color: white;
+  animation: open-expanded-list 0.5s ease-out;
+}
+
+@keyframes open-expanded-list {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
 }
 
 .expanded-list-title {
