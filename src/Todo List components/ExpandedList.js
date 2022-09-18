@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import classes from "./TodoList.module.css";
 
 import TaskList from "./TaskList";
@@ -35,12 +35,39 @@ const ExpandedList = ({
     updateListHandler(newListObject);
   };
 
+  const editHeaderHandler = event => {
+    let newListObject = listObject;
+    if (event.target.innerText !== newListObject.title) {
+      newListObject.title = event.target.innerText;
+      updateListHandler(newListObject);
+    }
+  };
+
+  const accountMenuRef = useRef();
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target)) {
+        
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [accountMenuRef]);
+
   return (
     <div className={classes["expanded-list-container"]} onClick={closeExpandedListHandler}>
       <div className={classes["expanded-list"]} onClick={e => e.stopPropagation()}>
         <div className={classes["todo-header"]}>
-          <h2>{listObject.title}</h2>
-          <button onClick={() => deleteListHandler(listObject)}>X</button>
+          <div
+            contentEditable={true}
+            className={classes["expanded-list-title"]}
+            onBlur={editHeaderHandler}
+            suppressContentEditableWarning={true}>
+            {listObject.title}
+          </div>
+          {/* <button onClick={() => deleteListHandler(listObject)}>X</button> */}
         </div>
         <TaskList
           listSource={listObject.tasks}

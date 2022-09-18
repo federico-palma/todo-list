@@ -10,7 +10,6 @@ const TodoList = ({
 }) => {
   const newTaskInputRef = useRef();
   const [showCompletedTasks, setShowCompletedTasks] = useState();
-  // const [expandedList, setExpandedList] = useState(false);
 
   const addNewTaskHandler = event => {
     event.preventDefault();
@@ -36,14 +35,20 @@ const TodoList = ({
   };
 
   return (
-    <div
-      className={classes["todo-list"]}
-      onClick={() => {
-        showExpandedListHandler(listObject);
-      }}>
-      <div className={classes["todo-header"]}>
+    <div className={classes["todo-list"]}>
+      <div
+        className={classes["todo-header"]}
+        onClick={() => {
+          showExpandedListHandler(listObject);
+        }}>
         <h2>{listObject.title}</h2>
-        <button onClick={() => deleteListHandler(listObject)}>X</button>
+        <button
+          onClick={e => {
+            e.stopPropagation();
+            deleteListHandler(listObject);
+          }}>
+          X
+        </button>
       </div>
       <TaskList
         listSource={listObject.tasks}

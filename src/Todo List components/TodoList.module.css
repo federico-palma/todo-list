@@ -26,8 +26,12 @@
   justify-content: space-between;
 }
 
+.todo-header:hover {
+  cursor: pointer;
+}
+
 .todo-header h2 {
-  cursor: default;
+  /* cursor: default; */
   margin: 0px auto;
   width: 100%;
   border-bottom: 1px solid black;
@@ -133,10 +137,11 @@
 
 .expanded-list {
   position: absolute;
-  top: 15%;
+  top: 100px;
   height: fit-content;
   min-height: 200px;
   width: 700px;
+  max-width: 95%;
   border: solid 2px black;
   border-radius: 10px;
   margin: 10px;
@@ -146,4 +151,17 @@
   align-items: flex-start;
   justify-content: flex-start;
   background-color: white;
+}
+
+.expanded-list-title {
+  cursor: text;
+  margin: 0px auto;
+  width: 100%;
+  border-bottom: 1px solid black;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.expanded-list-title:focus {
+  outline: none;
 }
