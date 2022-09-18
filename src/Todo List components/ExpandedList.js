@@ -24,23 +24,43 @@ const ExpandedList = ({
 
   const toggleCompletedTaskStatus = (currentList, index) => {
     let newListObject = listObject;
-    let element;
+    let newTask;
     if (currentList === "completed") {
-      element = newListObject.completedTasks.splice(index, 1);
-      newListObject.tasks.push(element);
+      newTask = newListObject.completedTasks.splice(index, 1);
+      newListObject.tasks.push(newTask);
     } else {
-      element = newListObject.tasks.splice(index, 1);
-      newListObject.completedTasks.push(element);
+      newTask = newListObject.tasks.splice(index, 1);
+      newListObject.completedTasks.push(newTask);
     }
     updateListHandler(newListObject);
   };
 
+  // Edit list header and tasks, delete task if text content is empty.
   const editHeaderHandler = event => {
     let newListObject = listObject;
     if (event.target.innerText !== newListObject.title) {
       newListObject.title = event.target.innerText;
       updateListHandler(newListObject);
     }
+  };
+
+  const editTaskHandler = (event, currentList, index) => {
+    let newListObject = listObject;
+    let newTaskContent = event.target.innerText;
+    if (newTaskContent === "") {
+      if (currentList === "completed") {
+        newListObject.completedTasks.splice(index, 1)
+      } else {
+        newListObject.tasks.splice(index, 1)
+      }
+    } else {
+      if (currentList === "completed") {
+        newListObject.completedTasks.splice(index, 1, newTaskContent);
+      } else {
+        newListObject.tasks.splice(index, 1, newTaskContent);
+      }
+    }
+    updateListHandler(newListObject);
   };
 
   return (
@@ -59,7 +79,9 @@ const ExpandedList = ({
         <TaskList
           listSource={listObject.tasks}
           toggleCompletedTaskStatus={toggleCompletedTaskStatus}
-          listType="tasks"></TaskList>
+          listType="tasks"
+          expandedList={true}
+          editTaskHandler={editTaskHandler}></TaskList>
         <p
           onClick={() => setShowCompletedTasks(prevState => !prevState)}
           className={classes["toggle-complete"]}>
@@ -73,7 +95,9 @@ const ExpandedList = ({
           <TaskList
             listSource={listObject.completedTasks}
             toggleCompletedTaskStatus={toggleCompletedTaskStatus}
-            listType="completed"></TaskList>
+            listType="completed"
+            expandedList={true}
+            editTaskHandler={editTaskHandler}></TaskList>
         )}
         <form className={classes["new-task-form"]} onSubmit={addNewTaskHandler}>
           <input ref={newTaskInputRef} type="text" placeholder="Add new task" />
