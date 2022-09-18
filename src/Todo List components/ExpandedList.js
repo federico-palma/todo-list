@@ -38,7 +38,10 @@ const ExpandedList = ({
   // Edit list header and tasks, delete task if text content is empty.
   const editHeaderHandler = event => {
     let newListObject = listObject;
-    if (event.target.innerText !== newListObject.title) {
+    if (event.target.innerText === "") {
+      newListObject.title = "Unnamed List";
+      updateListHandler(newListObject);
+    } else if (event.target.innerText !== newListObject.title) {
       newListObject.title = event.target.innerText;
       updateListHandler(newListObject);
     }
@@ -49,9 +52,9 @@ const ExpandedList = ({
     let newTaskContent = event.target.innerText;
     if (newTaskContent === "") {
       if (currentList === "completed") {
-        newListObject.completedTasks.splice(index, 1)
+        newListObject.completedTasks.splice(index, 1);
       } else {
-        newListObject.tasks.splice(index, 1)
+        newListObject.tasks.splice(index, 1);
       }
     } else {
       if (currentList === "completed") {
