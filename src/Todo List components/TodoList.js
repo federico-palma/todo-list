@@ -2,10 +2,14 @@ import { useRef, useState } from "react";
 import TaskList from "./TaskList";
 import classes from "./TodoList.module.css";
 
-const TodoList = ({ listObject, updateListHandler, deleteListHandler }) => {
+const TodoList = ({
+  listObject,
+  updateListHandler,
+  deleteListHandler,
+  showExpandedListHandler,
+}) => {
   const newTaskInputRef = useRef();
   const [showCompletedTasks, setShowCompletedTasks] = useState();
-  // const [expandedList, setExpandedList] = useState(false);
 
   const addNewTaskHandler = event => {
     event.preventDefault();
@@ -31,17 +35,30 @@ const TodoList = ({ listObject, updateListHandler, deleteListHandler }) => {
   };
 
   return (
-    <div className={classes["todo-list"]}>
+    <div
+      className={classes["todo-list"]}
+      onClick={() => {
+        showExpandedListHandler(listObject);
+      }}>
       <div className={classes["todo-header"]}>
         <h2>{listObject.title}</h2>
-        <button onClick={() => deleteListHandler(listObject)}>X</button>
+        <button
+          onClick={e => {
+            e.stopPropagation();
+            deleteListHandler(listObject);
+          }}>
+          X
+        </button>
       </div>
       <TaskList
         listSource={listObject.tasks}
         toggleCompletedTaskStatus={toggleCompletedTaskStatus}
         listType="tasks"></TaskList>
       <p
-        onClick={() => setShowCompletedTasks(prevState => !prevState)}
+        onClick={e => {
+          e.stopPropagation();
+          setShowCompletedTasks(prevState => !prevState);
+        }}
         className={classes["toggle-complete"]}>
         {listObject.completedTasks?.length > 0
           ? showCompletedTasks
@@ -55,7 +72,12 @@ const TodoList = ({ listObject, updateListHandler, deleteListHandler }) => {
           toggleCompletedTaskStatus={toggleCompletedTaskStatus}
           listType="completed"></TaskList>
       )}
-      <form className={classes["new-task-form"]} onSubmit={addNewTaskHandler}>
+      <form
+        className={classes["new-task-form"]}
+        onSubmit={addNewTaskHandler}
+        onClick={e => {
+          e.stopPropagation();
+        }}>
         <input ref={newTaskInputRef} type="text" placeholder="Add new task" />
         <button>+</button>
       </form>

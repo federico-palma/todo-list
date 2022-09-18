@@ -12,6 +12,19 @@
   align-items: flex-start;
   justify-content: flex-start;
   transition: box-shadow 0.5s;
+  background-color: white;
+  animation: scale-list 0.3s ease-out;
+}
+
+@keyframes scale-list {
+  from {
+    transform: scale(50%);
+    opacity: 0;
+  }
+  to {
+    transform: scale(100%);
+    opacity: 1;
+  }
 }
 
 .todo-list:hover {
@@ -25,8 +38,12 @@
   justify-content: space-between;
 }
 
+.todo-header:hover {
+  cursor: pointer;
+}
+
 .todo-header h2 {
-  cursor: default;
+  /* cursor: default; */
   margin: 0px auto;
   width: 100%;
   border-bottom: 1px solid black;
@@ -54,20 +71,49 @@
   margin: 5px 10px;
 }
 
-.tasks {
-  width: 100%;
-  font-size: 16px;
-  list-style-type: none;
-  padding: 0px;
+.task-list li {
+  display: grid;
+  grid-template-columns: 20px auto;
+  align-items: center;
+}
+
+.checkbox {
   cursor: pointer;
+}
+
+.task {
+  width: 100%;
+  min-width: 100px;
+  font-size: 16px;
+  padding: 0px;
   margin: 5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  animation: slide-task 0.2s ease-out;
+}
+
+@keyframes slide-task {
+  from {
+    transform: translateX(10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+.task:focus {
+  outline: none;
 }
 
 .completed {
   text-decoration: line-through;
+}
+
+.completed:focus {
+  text-decoration: none;
 }
 
 /* Show/Hide completed list */
@@ -110,9 +156,67 @@
   background-color: rgb(0, 159, 0);
 }
 
+/* Expanded list */
+.expanded-list-container {
+  margin: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  animation: open-expanded-list-container 0.5s ease-out;
+}
+
+@keyframes open-expanded-list-container {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .expanded-list {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 30%;
+  top: 100px;
+  height: fit-content;
+  min-height: 200px;
+  width: 700px;
+  max-width: 95%;
+  border: solid 2px black;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: white;
+  animation: open-expanded-list 0.5s ease-out;
+}
+
+@keyframes open-expanded-list {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.expanded-list-title {
+  cursor: text;
+  margin: 0px auto;
+  width: 100%;
+  border-bottom: 1px solid black;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.expanded-list-title:focus {
+  outline: none;
 }

@@ -72,7 +72,7 @@ function App() {
     }
   }, [todoLists, userLoggedIn]);
 
-  // Handle Save to Firebase realtime database
+  // Handle Load from/Save to Firebase realtime database
   useEffect(() => {
     if (auth.currentUser) {
       const pathRef = ref(dataBase, "users/" + auth.currentUser.uid + "/todoLists");
@@ -92,6 +92,7 @@ function App() {
           setFirebaseDataIsLoaded(true);
         } else {
           setTodoLists([]);
+          setFirebaseDataIsLoaded(true);
         }
       });
     }
@@ -128,7 +129,9 @@ function App() {
     if (window.confirm(`Are you sure you want to delete the list: ${listObject.title}?`)) {
       let newList = todoLists.filter(elem => elem.id !== listObject.id);
       setTodoLists(newList);
+      return true
     }
+    else return false
   };
 
   return (
