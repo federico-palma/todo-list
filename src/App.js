@@ -72,7 +72,7 @@ function App() {
     }
   }, [todoLists, userLoggedIn]);
 
-  // Handle Save to Firebase realtime database
+  // Handle Load from/Save to Firebase realtime database
   useEffect(() => {
     if (auth.currentUser) {
       const pathRef = ref(dataBase, "users/" + auth.currentUser.uid + "/todoLists");
@@ -92,6 +92,7 @@ function App() {
           setFirebaseDataIsLoaded(true);
         } else {
           setTodoLists([]);
+          setFirebaseDataIsLoaded(true);
         }
       });
     }
