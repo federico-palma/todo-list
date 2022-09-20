@@ -21,9 +21,9 @@ const TaskList = ({
                 toggleCompletedTaskStatus(listType, index);
               }}>
               {listType === "completed" ? (
-                <CheckCircleIcon className={classes.checkboxes} />
+                <CheckCircleIcon sx={{fontSize: '20px'}} className={classes.checkboxes} />
               ) : (
-                <RadioButtonUncheckedIcon className={classes.checkboxes} />
+                <RadioButtonUncheckedIcon sx={{fontSize: '20px'}} className={classes.checkboxes} />
               )}
             </div>
             {!expandedList && (
