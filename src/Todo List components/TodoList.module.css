@@ -38,10 +38,6 @@
   justify-content: space-between;
 }
 
-.todo-header:hover {
-  cursor: pointer;
-}
-
 .todo-header h2 {
   /* cursor: default; */
   margin: 0px auto;
@@ -77,8 +73,20 @@
   align-items: center;
 }
 
-.checkbox {
+.checkbox-container {
   cursor: pointer;
+  display: grid;
+  align-items: center;
+}
+
+.checkboxes {
+  font-size: 20px;
+  font-weight: 800;
+  opacity: 0.5;
+}
+
+.checkboxes:hover {
+  opacity: 1;
 }
 
 .task {
@@ -87,6 +95,7 @@
   font-size: 16px;
   padding: 0px;
   margin: 5px;
+  vertical-align: middle;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -158,6 +167,7 @@
 
 /* Expanded list */
 .expanded-list-container {
+  z-index: 10;
   margin: 0px;
   position: absolute;
   top: 0px;

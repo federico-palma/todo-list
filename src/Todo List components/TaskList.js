@@ -1,4 +1,6 @@
 import classes from "./TodoList.module.css";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
 const TaskList = ({
   listSource,
@@ -13,12 +15,16 @@ const TaskList = ({
         return (
           <li key={index}>
             <div
-              className={classes.checkbox}
+              className={classes["checkbox-container"]}
               onClick={e => {
                 e.stopPropagation();
                 toggleCompletedTaskStatus(listType, index);
               }}>
-              {listType === "completed" ? "X" : "O"}
+              {listType === "completed" ? (
+                <CheckCircleIcon className={classes.checkboxes} />
+              ) : (
+                <RadioButtonUncheckedIcon className={classes.checkboxes} />
+              )}
             </div>
             {!expandedList && (
               <div
