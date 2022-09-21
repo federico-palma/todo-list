@@ -23,6 +23,10 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
+// Set Firebase auth to always ask for specific google account.
+provider.setCustomParameters({
+  prompt: 'select_account'
+});
 
 export const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
