@@ -189,10 +189,11 @@
 }
 
 .expanded-list {
-  position: absolute;
+  position: fixed;
   top: 100px;
   height: fit-content;
   min-height: 200px;
+  max-height: 80%;
   width: 700px;
   max-width: 95%;
   border: solid 2px black;
@@ -228,4 +229,9 @@
 
 .expanded-list-title:focus {
   outline: none;
+}
+
+.expanded-tasks-container {
+  overflow-y: scroll;
+  width: 100%;
 }

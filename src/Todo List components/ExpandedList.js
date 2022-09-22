@@ -79,29 +79,31 @@ const ExpandedList = ({
           </div>
           <button onClick={() => deleteExpListHandler(listObject)}>X</button>
         </div>
-        <TaskList
-          listSource={listObject.tasks}
-          toggleCompletedTaskStatus={toggleCompletedTaskStatus}
-          listType="tasks"
-          expandedList={true}
-          editTaskHandler={editTaskHandler}></TaskList>
-        <p
-          onClick={() => setShowCompletedTasks(prevState => !prevState)}
-          className={classes["toggle-complete"]}>
-          {listObject.completedTasks?.length > 0
-            ? showCompletedTasks
-              ? "- Hide completed tasks -"
-              : "- Show completed tasks -"
-            : ""}
-        </p>
-        {showCompletedTasks && listObject.completedTasks?.length > 0 && (
+        <div className={classes["expanded-tasks-container"]}>
           <TaskList
-            listSource={listObject.completedTasks}
+            listSource={listObject.tasks}
             toggleCompletedTaskStatus={toggleCompletedTaskStatus}
-            listType="completed"
+            listType="tasks"
             expandedList={true}
             editTaskHandler={editTaskHandler}></TaskList>
-        )}
+          <p
+            onClick={() => setShowCompletedTasks(prevState => !prevState)}
+            className={classes["toggle-complete"]}>
+            {listObject.completedTasks?.length > 0
+              ? showCompletedTasks
+                ? "- Hide completed tasks -"
+                : "- Show completed tasks -"
+              : ""}
+          </p>
+          {showCompletedTasks && listObject.completedTasks?.length > 0 && (
+            <TaskList
+              listSource={listObject.completedTasks}
+              toggleCompletedTaskStatus={toggleCompletedTaskStatus}
+              listType="completed"
+              expandedList={true}
+              editTaskHandler={editTaskHandler}></TaskList>
+          )}
+        </div>
         <form className={classes["new-task-form"]} onSubmit={addNewTaskHandler}>
           <input ref={newTaskInputRef} type="text" placeholder="Add new task" />
           <button>+</button>
