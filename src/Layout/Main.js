@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./Main.module.css";
 import NewListForm from "../Components/NewListForm";
 import TodoList from "../Todo List components/TodoList";
@@ -7,6 +7,15 @@ import ExpandedList from "../Todo List components/ExpandedList";
 const Main = ({ todoLists, addNewListHandler, updateListHandler, deleteListHandler }) => {
   const [showExpandedList, setShowExpandedList] = useState(false);
   const [expandedListId, setExpandedListId] = useState(null);
+
+  // prevent scroll on expanded list showing.
+  useEffect(() => {
+    if (showExpandedList) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "scroll"
+    }
+  }, [showExpandedList])
 
   const showExpandedListHandler = todoList => {
     setExpandedListId(todoList.id);
