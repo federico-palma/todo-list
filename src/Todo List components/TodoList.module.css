@@ -141,6 +141,7 @@
   border: 1px solid black;
   border-radius: 10px;
   display: grid;
+  margin-top: auto;
   grid-template-columns: 90% 1fr;
 }
 
