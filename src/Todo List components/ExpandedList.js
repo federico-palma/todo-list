@@ -14,9 +14,9 @@ const ExpandedList = ({
 
   const addNewTaskHandler = event => {
     event.preventDefault();
-    if (newTaskInputRef.current.value !== "") {
+    if (newTaskInputRef.current.value.trim() !== "") {
       let newListObject = listObject;
-      newListObject.tasks.push(newTaskInputRef.current.value);
+      newListObject.createNewTask(newTaskInputRef.current.value);
       updateListHandler(newListObject);
     }
     newTaskInputRef.current.value = "";

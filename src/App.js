@@ -15,6 +15,9 @@ class TodoListClass {
     this.tasks = [];
     this.completedTasks = [];
   }
+  createNewTask(taskText) {
+    this.tasks.push(taskText);
+  }
   toggleTaskStatus(currentList, index) {
     let element;
     if (currentList === "completed") {
@@ -139,9 +142,8 @@ function App() {
     if (window.confirm(`Are you sure you want to delete the list: ${listObject.title}?`)) {
       let newList = todoLists.filter(elem => elem.id !== listObject.id);
       setTodoLists(newList);
-      return true
-    }
-    else return false
+      return true;
+    } else return false;
   };
 
   return (
