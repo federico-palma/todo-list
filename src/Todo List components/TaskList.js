@@ -42,15 +42,19 @@ const TaskList = ({
                 contentEditable={true}
                 suppressContentEditableWarning={true}
                 onBlur={event => editTaskHandler(event, listType, index)}
-                className={`${classes.task} ${listType === "completed" ? classes.completed : ""}`}>
+                className={`${classes["expanded-tasks"]} ${classes.task} ${
+                  listType === "completed" ? classes.completed : ""
+                }`}>
                 {elem}
               </div>
             )}
             {expandedList && (
-              <div className={classes["delete-task-container"]} onClick={(e) => {
-                e.stopPropagation();
-                deleteTaskHandler(listType, index);
-              }}>
+              <div
+                className={classes["delete-task-container"]}
+                onClick={e => {
+                  e.stopPropagation();
+                  deleteTaskHandler(listType, index);
+                }}>
                 <CloseIcon sx={{ fontSize: "20px" }} className={classes["delete-btn"]} />
               </div>
             )}

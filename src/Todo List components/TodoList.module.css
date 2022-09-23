@@ -240,3 +240,7 @@
   overflow-y: scroll;
   width: 100%;
 }
+
+.expanded-tasks{
+  white-space: normal;
+}
