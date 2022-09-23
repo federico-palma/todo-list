@@ -15,6 +15,16 @@ class TodoListClass {
     this.tasks = [];
     this.completedTasks = [];
   }
+  toggleTaskStatus(currentList, index) {
+    let element;
+    if (currentList === "completed") {
+      element = this.completedTasks.splice(index, 1);
+      this.tasks.push(element);
+    } else {
+      element = this.tasks.splice(index, 1);
+      this.completedTasks.push(element);
+    }
+  }
 }
 
 function App() {
