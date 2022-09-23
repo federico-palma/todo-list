@@ -7,7 +7,7 @@ const NewListForm = ({ addNewListHandler }) => {
 
   const submitNewListHandler = event => {
     event.preventDefault();
-    if (newListNameRef.current.value !== "") {
+    if (newListNameRef.current.value.trim() !== "") {
       addNewListHandler(newListNameRef.current.value);
     }
     newListNameRef.current.value = "";
