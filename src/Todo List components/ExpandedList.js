@@ -75,6 +75,7 @@ const ExpandedList = ({
             contentEditable={true}
             className={classes["expanded-list-title"]}
             onBlur={editHeaderHandler}
+            onKeyDown={(e) => {if (e.key === "Enter") e.currentTarget.blur()}}
             suppressContentEditableWarning={true}>
             {listObject.title}
           </div>

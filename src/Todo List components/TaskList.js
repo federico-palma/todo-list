@@ -42,6 +42,7 @@ const TaskList = ({
                 contentEditable={true}
                 suppressContentEditableWarning={true}
                 onBlur={event => editTaskHandler(event, listType, index)}
+                onKeyDown={(e) => {if (e.key === "Enter") e.currentTarget.blur()}}
                 className={`${classes["expanded-tasks"]} ${classes.task} ${
                   listType === "completed" ? classes.completed : ""
                 }`}>
