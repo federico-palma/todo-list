@@ -22,6 +22,12 @@ const ExpandedList = ({
     newTaskInputRef.current.value = "";
   };
 
+  const deleteTaskHandler = (currentList, index) => {
+    let newListObject = listObject;
+    newListObject.deleteTask(currentList, index);
+    updateListHandler(newListObject);
+  };
+
   const toggleCompletedTaskStatus = (currentList, index) => {
     let newListObject = listObject;
     newListObject.toggleTaskStatus(currentList, index);
@@ -76,6 +82,7 @@ const ExpandedList = ({
           <TaskList
             listSource={listObject.tasks}
             toggleCompletedTaskStatus={toggleCompletedTaskStatus}
+            deleteTaskHandler={deleteTaskHandler}
             listType="tasks"
             expandedList={true}
             editTaskHandler={editTaskHandler}></TaskList>
@@ -92,6 +99,7 @@ const ExpandedList = ({
             <TaskList
               listSource={listObject.completedTasks}
               toggleCompletedTaskStatus={toggleCompletedTaskStatus}
+              deleteTaskHandler={deleteTaskHandler}
               listType="completed"
               expandedList={true}
               editTaskHandler={editTaskHandler}></TaskList>

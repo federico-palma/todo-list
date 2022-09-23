@@ -18,6 +18,13 @@ class TodoListClass {
   createNewTask(taskText) {
     this.tasks.push(taskText);
   }
+  deleteTask(currentList, index) {
+    if (currentList === "completed") {
+      this.completedTasks.splice(index, 1);
+    } else {
+      this.tasks.splice(index, 1);
+    }
+  }
   toggleTaskStatus(currentList, index) {
     let element;
     if (currentList === "completed") {

@@ -1,10 +1,12 @@
 import classes from "./TodoList.module.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
+import CloseIcon from "@mui/icons-material/Close";
 
 const TaskList = ({
   listSource,
   toggleCompletedTaskStatus,
+  deleteTaskHandler,
   listType,
   expandedList,
   editTaskHandler,
@@ -21,9 +23,12 @@ const TaskList = ({
                 toggleCompletedTaskStatus(listType, index);
               }}>
               {listType === "completed" ? (
-                <CheckCircleIcon sx={{fontSize: '20px'}} className={classes.checkboxes} />
+                <CheckCircleIcon sx={{ fontSize: "20px" }} className={classes.checkboxes} />
               ) : (
-                <RadioButtonUncheckedIcon sx={{fontSize: '20px'}} className={classes.checkboxes} />
+                <RadioButtonUncheckedIcon
+                  sx={{ fontSize: "20px" }}
+                  className={classes.checkboxes}
+                />
               )}
             </div>
             {!expandedList && (
@@ -39,6 +44,14 @@ const TaskList = ({
                 onBlur={event => editTaskHandler(event, listType, index)}
                 className={`${classes.task} ${listType === "completed" ? classes.completed : ""}`}>
                 {elem}
+              </div>
+            )}
+            {expandedList && (
+              <div className={classes["delete-task-container"]} onClick={(e) => {
+                e.stopPropagation();
+                deleteTaskHandler(listType, index);
+              }}>
+                <CloseIcon sx={{ fontSize: "20px" }} className={classes["delete-btn"]} />
               </div>
             )}
           </li>
