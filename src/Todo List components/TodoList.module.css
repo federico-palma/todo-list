@@ -7,10 +7,8 @@
   border-radius: 10px;
   margin: 10px;
   padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-rows: 30px 1fr 30px;
   transition: box-shadow 0.5s;
   background-color: white;
   animation: scale-list 0.3s ease-out;
@@ -34,8 +32,8 @@
 /* header */
 .todo-header {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 35px;
 }
 
 .todo-header h2 {
@@ -50,10 +48,13 @@
   background: none;
   border: none;
   border-radius: 8px;
-  width: 40px;
+  width: 35px;
   color: white;
   background-color: rgba(255, 0, 0, 0.55);
   transition: background-color 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .todo-header button:hover {
@@ -130,11 +131,11 @@
 
 /* Show/Hide completed list */
 .toggle-complete {
-  margin-top: auto;
+  /* margin-top: auto; */
+  margin-bottom: 10px;
   cursor: pointer;
   font-size: 12px;
   text-align: center;
-  align-self: center;
 }
 
 /* New task form */
@@ -145,8 +146,8 @@
   border: 1px solid black;
   border-radius: 10px;
   display: grid;
+  grid-template-columns: 1fr 30px;
   margin-top: auto;
-  grid-template-columns: 90% 1fr;
 }
 
 .new-task-form input {
@@ -163,6 +164,9 @@
   border-radius: 8px;
   background-color: rgba(0, 159, 0, 0.55);
   transition: background-color 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .new-task-form button:hover {
@@ -205,10 +209,11 @@
   border: solid 2px black;
   border-radius: 10px;
   padding: 10px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  /* flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: space-evenly; */
+  grid-template-rows: 30px 1fr 30px;
   background-color: white;
   animation: open-expanded-list 0.5s ease-out;
 }

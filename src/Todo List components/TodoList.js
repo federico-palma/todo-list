@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import TaskList from "./TaskList";
 import classes from "./TodoList.module.css";
+import CloseIcon from "@mui/icons-material/Close";
+import AddIcon from '@mui/icons-material/Add';
 
 const TodoList = ({
   listObject,
@@ -40,7 +42,7 @@ const TodoList = ({
             e.stopPropagation();
             deleteListHandler(listObject);
           }}>
-          X
+          <CloseIcon sx={{ fontSize: "20px" }} />
         </button>
       </div>
       <TaskList
@@ -72,7 +74,7 @@ const TodoList = ({
           e.stopPropagation();
         }}>
         <input ref={newTaskInputRef} type="text" placeholder="Add new task" />
-        <button>+</button>
+        <button><AddIcon sx={{ fontSize: "20px" }}/></button>
       </form>
     </div>
   );

@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import classes from "./TodoList.module.css";
 
 import TaskList from "./TaskList";
+import CloseIcon from "@mui/icons-material/Close";
+import AddIcon from "@mui/icons-material/Add";
 
 const ExpandedList = ({
   listObject,
@@ -76,7 +78,9 @@ const ExpandedList = ({
             suppressContentEditableWarning={true}>
             {listObject.title}
           </div>
-          <button onClick={() => deleteExpListHandler(listObject)}>X</button>
+          <button onClick={() => deleteExpListHandler(listObject)}>
+            <CloseIcon sx={{ fontSize: "20px" }} />
+          </button>
         </div>
         <div className={classes["expanded-tasks-container"]}>
           <TaskList
@@ -107,7 +111,9 @@ const ExpandedList = ({
         </div>
         <form className={classes["new-task-form"]} onSubmit={addNewTaskHandler}>
           <input ref={newTaskInputRef} type="text" placeholder="Add new task" />
-          <button>+</button>
+          <button>
+            <AddIcon sx={{ fontSize: "20px" }} />
+          </button>
         </form>
       </div>
     </div>
