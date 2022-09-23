@@ -39,7 +39,7 @@ class TodoListClass {
 
 function App() {
   useEffect(() => {
-    document.title = "ToDo Lists App";
+    document.title = "ToDo Lists Manager";
   }, []);
 
   const [todoLists, setTodoLists] = useState([]);
