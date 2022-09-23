@@ -14,24 +14,23 @@ const ExpandedList = ({
 
   const addNewTaskHandler = event => {
     event.preventDefault();
-    if (newTaskInputRef.current.value !== "") {
+    if (newTaskInputRef.current.value.trim() !== "") {
       let newListObject = listObject;
-      newListObject.tasks.push(newTaskInputRef.current.value);
+      newListObject.createNewTask(newTaskInputRef.current.value);
       updateListHandler(newListObject);
     }
     newTaskInputRef.current.value = "";
   };
 
+  const deleteTaskHandler = (currentList, index) => {
+    let newListObject = listObject;
+    newListObject.deleteTask(currentList, index);
+    updateListHandler(newListObject);
+  };
+
   const toggleCompletedTaskStatus = (currentList, index) => {
     let newListObject = listObject;
-    let newTask;
-    if (currentList === "completed") {
-      newTask = newListObject.completedTasks.splice(index, 1);
-      newListObject.tasks.push(newTask);
-    } else {
-      newTask = newListObject.tasks.splice(index, 1);
-      newListObject.completedTasks.push(newTask);
-    }
+    newListObject.toggleTaskStatus(currentList, index);
     updateListHandler(newListObject);
   };
 
@@ -83,6 +82,7 @@ const ExpandedList = ({
           <TaskList
             listSource={listObject.tasks}
             toggleCompletedTaskStatus={toggleCompletedTaskStatus}
+            deleteTaskHandler={deleteTaskHandler}
             listType="tasks"
             expandedList={true}
             editTaskHandler={editTaskHandler}></TaskList>
@@ -99,6 +99,7 @@ const ExpandedList = ({
             <TaskList
               listSource={listObject.completedTasks}
               toggleCompletedTaskStatus={toggleCompletedTaskStatus}
+              deleteTaskHandler={deleteTaskHandler}
               listType="completed"
               expandedList={true}
               editTaskHandler={editTaskHandler}></TaskList>

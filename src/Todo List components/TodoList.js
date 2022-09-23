@@ -13,9 +13,9 @@ const TodoList = ({
 
   const addNewTaskHandler = event => {
     event.preventDefault();
-    if (newTaskInputRef.current.value !== "") {
+    if (newTaskInputRef.current.value.trim() !== "") {
       let newListObject = listObject;
-      newListObject.tasks.push(newTaskInputRef.current.value);
+      newListObject.createNewTask(newTaskInputRef.current.value);
       updateListHandler(newListObject);
     }
     newTaskInputRef.current.value = "";
@@ -23,14 +23,7 @@ const TodoList = ({
 
   const toggleCompletedTaskStatus = (currentList, index) => {
     let newListObject = listObject;
-    let element;
-    if (currentList === "completed") {
-      element = newListObject.completedTasks.splice(index, 1);
-      newListObject.tasks.push(element);
-    } else {
-      element = newListObject.tasks.splice(index, 1);
-      newListObject.completedTasks.push(element);
-    }
+    newListObject.toggleTaskStatus(currentList, index);
     updateListHandler(newListObject);
   };
 

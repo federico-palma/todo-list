@@ -69,22 +69,26 @@
 
 .task-list li {
   display: grid;
-  grid-template-columns: 20px auto;
+  grid-template-columns: 20px auto 20px;
   align-items: center;
 }
 
-.checkbox-container {
+.checkbox-container,
+.delete-task-container {
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0px 5px;
 }
 
-.checkboxes {
+.checkboxes,
+.delete-task-container {
   opacity: 0.5;
 }
 
-.checkboxes:hover {
+.checkboxes:hover,
+.delete-task-container:hover {
   opacity: 1;
 }
 
@@ -235,4 +239,8 @@
 .expanded-tasks-container {
   overflow-y: scroll;
   width: 100%;
+}
+
+.expanded-tasks{
+  white-space: normal;
 }

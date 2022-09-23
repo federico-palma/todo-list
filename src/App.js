@@ -15,6 +15,26 @@ class TodoListClass {
     this.tasks = [];
     this.completedTasks = [];
   }
+  createNewTask(taskText) {
+    this.tasks.push(taskText);
+  }
+  deleteTask(currentList, index) {
+    if (currentList === "completed") {
+      this.completedTasks.splice(index, 1);
+    } else {
+      this.tasks.splice(index, 1);
+    }
+  }
+  toggleTaskStatus(currentList, index) {
+    let element;
+    if (currentList === "completed") {
+      element = this.completedTasks.splice(index, 1);
+      this.tasks.push(element);
+    } else {
+      element = this.tasks.splice(index, 1);
+      this.completedTasks.push(element);
+    }
+  }
 }
 
 function App() {
@@ -129,9 +149,8 @@ function App() {
     if (window.confirm(`Are you sure you want to delete the list: ${listObject.title}?`)) {
       let newList = todoLists.filter(elem => elem.id !== listObject.id);
       setTodoLists(newList);
-      return true
-    }
-    else return false
+      return true;
+    } else return false;
   };
 
   return (
