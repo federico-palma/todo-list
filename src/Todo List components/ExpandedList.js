@@ -24,14 +24,7 @@ const ExpandedList = ({
 
   const toggleCompletedTaskStatus = (currentList, index) => {
     let newListObject = listObject;
-    let newTask;
-    if (currentList === "completed") {
-      newTask = newListObject.completedTasks.splice(index, 1);
-      newListObject.tasks.push(newTask);
-    } else {
-      newTask = newListObject.tasks.splice(index, 1);
-      newListObject.completedTasks.push(newTask);
-    }
+    newListObject.toggleTaskStatus(currentList, index);
     updateListHandler(newListObject);
   };
 
