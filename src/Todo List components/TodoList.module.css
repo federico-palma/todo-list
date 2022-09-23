@@ -245,6 +245,9 @@
 .expanded-tasks-container {
   overflow-y: scroll;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .expanded-tasks{
