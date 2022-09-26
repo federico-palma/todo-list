@@ -9,11 +9,11 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { onValue, ref, set } from "firebase/database";
 
 class TodoListClass {
-  constructor(title) {
-    this.id = uuidv4();
-    this.title = title;
-    this.tasks = [];
-    this.completedTasks = [];
+  constructor(title, id, tasks, completedTasks) {
+    this.id = id || uuidv4();
+    this.title = title || "Unnamed List";
+    this.tasks = tasks || [];
+    this.completedTasks = completedTasks || [];
   }
   createNewTask(taskText) {
     this.tasks.push(taskText);
@@ -101,12 +101,14 @@ function App() {
         const data = snapshot.val();
         if (data) {
           data.forEach(dbList => {
-            fetchedLists.push({
-              id: dbList.id,
-              title: dbList.title,
-              tasks: dbList.tasks ? [...dbList.tasks] : [],
-              completedTasks: dbList.completedTasks ? [...dbList.completedTasks] : [],
-            });
+            fetchedLists.push(
+              new TodoListClass(
+                dbList.title,
+                dbList.id,
+                dbList.tasks ? [...dbList.tasks] : [],
+                dbList.completedTasks ? [...dbList.completedTasks] : []
+              )
+            );
           });
           setTodoLists([...fetchedLists]);
           setFirebaseDataIsLoaded(true);
