@@ -84,11 +84,12 @@
 }
 
 .auth-div button {
-  margin: 20px auto 5px auto;
+  margin: 10px auto 10px auto;
   cursor: pointer;
   background-color: white;
   transition: background-color 0.3s, box-shadow 0.3s;
   width: fit-content;
+  white-space: nowrap;
 
   border: none;
   border-radius: 3px;
