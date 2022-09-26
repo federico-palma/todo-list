@@ -18,7 +18,14 @@ const Header = ({ user, userLoggedIn, logInWithGoogleHandler, signOutHandler }) 
     <div className={classes.header}>
       <h1>ToDo List Manager</h1>
       <div className={classes["account-icon"]} onClick={showAccountMenuHandler}>
-        <img src={userLoggedIn ? user.photoURL : pngPerson} alt="" />
+        <img
+          src={userLoggedIn ? user.photoURL : pngPerson}
+          alt=""
+          onError={e => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = pngPerson;
+          }}
+        />
       </div>
       {showAccountMenu && (
         <AccountMenu
