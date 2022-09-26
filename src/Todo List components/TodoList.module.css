@@ -41,6 +41,9 @@
   margin: 0px auto;
   width: 100%;
   border-bottom: 1px solid black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .todo-header button {
@@ -49,6 +52,7 @@
   border: none;
   border-radius: 8px;
   width: 35px;
+  height: 30px;
   color: white;
   background-color: rgba(255, 0, 0, 0.55);
   transition: background-color 0.5s;
@@ -203,17 +207,14 @@
   top: 100px;
   height: fit-content;
   min-height: 200px;
-  max-height: 80%;
+  max-height: 80vh;
   width: 700px;
   max-width: 95%;
   border: solid 2px black;
   border-radius: 10px;
   padding: 10px;
   display: grid;
-  /* flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-evenly; */
-  grid-template-rows: 30px 1fr 30px;
+  grid-template-rows: auto 1fr 30px;
   background-color: white;
   animation: open-expanded-list 0.5s ease-out;
 }
@@ -233,9 +234,17 @@
   cursor: text;
   margin: 0px auto;
   width: 100%;
+  height: fit-content;
   border-bottom: 1px solid black;
   font-size: 1.5rem;
   font-weight: 700;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 .expanded-list-title:focus {
