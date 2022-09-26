@@ -48,6 +48,8 @@
 }
 
 .auth-div {
+  width: fit-content;
+  max-width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,8 +68,14 @@
   transform: rotate(45deg);
   z-index: -1;
 }
+.auth-div .account-icon {
+  width: 50px;
+  height: 50px;
+  cursor: default;
+}
 
 .auth-div h3 {
+  margin: 15px auto;
   color: #ffffff;
   font-weight: 500;
   font-size: 20px;
@@ -76,6 +84,7 @@
 }
 
 .auth-div button {
+  margin: 20px auto 5px auto;
   cursor: pointer;
   background-color: white;
   transition: background-color 0.3s, box-shadow 0.3s;

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useRef } from "react";
 import classes from "./Header.module.css";
+import pngPerson from "../Assets/pngPerson.png";
 
 const AccountMenu = ({
   user,
@@ -34,7 +35,18 @@ const AccountMenu = ({
       )}
       {userLoggedIn && (
         <div className={classes["auth-div"]}>
+          <div className={classes["account-icon"]}>
+            <img
+              src={userLoggedIn ? user.photoURL : pngPerson}
+              alt=""
+              onError={e => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = pngPerson;
+              }}
+            />
+          </div>
           <h3>{user.displayName}</h3>
+          <h3>{user.email}</h3>
           <button onClick={signOutHandler} className={classes["logout-btn"]}>
             Log Out
           </button>
